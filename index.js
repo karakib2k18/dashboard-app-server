@@ -61,12 +61,7 @@ async function run() {
       const filter = { _id: ObjectId(req.body._id) };
       const options = { upsert: true };
       const updateDoc = {
-        $set: { name: updateName },
-        $set: { age: updateAge },
-        $set: { school: updateSchool },
-        $set: { classa: updateClassa },
-        $set: { division: updateDivision },
-        $set: { status: updateStatus },
+        $set: { name: updateName,age: updateAge,school: updateSchool , classa: updateClassa , division: updateDivision , status: updateStatus },
       };
       const result = await addstudentCollection.updateOne(
         filter,
