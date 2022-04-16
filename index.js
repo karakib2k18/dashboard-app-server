@@ -52,12 +52,12 @@ async function run() {
     app.put("/addstudent/:id", async (req, res) => {
       console.log(req.body);
       const id = req.body._id;
-      let updateName = req.body.name;
-      let updateAge = req.body.age;
-      let updateSchool = req.body.school;
-      let updateClassa = req.body.classa;
-      let updateDivision = req.body.division;
-      let updateStatus = req.body.status;
+      const updateName = req.body.name;
+      const updateAge = req.body.age;
+      const updateSchool = req.body.school;
+      const updateClassa = req.body.classa;
+      const updateDivision = req.body.division;
+      const updateStatus = req.body.status;
       const filter = { _id: ObjectId(req.body._id) };
       const options = { upsert: true };
       const updateDoc = {
