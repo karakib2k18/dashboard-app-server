@@ -52,11 +52,12 @@ async function run() {
       const cursor = addstudentCollection.find({});
       const page = req.query.currentPage;
       const size = parseInt(req.query.perPageItem);
+      console.log(req.query)
 
       let students;
       const count = await cursor.count();
       if (page) {
-        result = await cursor
+        students = await cursor
           .skip(page * size)
           .limit(size)
           .toArray();
