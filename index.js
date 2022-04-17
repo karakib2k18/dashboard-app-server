@@ -53,7 +53,7 @@ async function run() {
       const page = req.query.currentPage;
       const size = parseInt(req.query.perPageItem);
 
-      let result;
+      let students;
       const count = await cursor.count();
       if (page) {
         result = await cursor
@@ -61,12 +61,12 @@ async function run() {
           .limit(size)
           .toArray();
       } else {
-        result = await cursor.toArray();
+        students = await cursor.toArray();
       }
 
       res.send({
         count,
-        result,
+        students,
       });
     });
 
