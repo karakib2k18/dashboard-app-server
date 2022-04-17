@@ -29,11 +29,11 @@ async function run() {
     const viewstudentCollection = database.collection("viewstudent");
 
 
-    //get all products
-    app.get("/addstudent", async (req, res) => {
-      const result = await addstudentCollection.find({}).toArray();
-      res.json(result);
-    });
+    // //get all students
+    // app.get("/addstudent", async (req, res) => {
+    //   const result = await addstudentCollection.find({}).toArray();
+    //   res.json(result);
+    // });
 
     app.post("/addstudent", async (req, res) => {
       const addstudent = req.body;
@@ -47,8 +47,30 @@ async function run() {
       const result = await addstudentCollection.deleteOne(query);
       res.json(result);
     });
+    // get all students suing pagination
+    app.get("/addstudent", async (req, res) => {
+      const cursor = addstudentCollection.find({});
+      const page = req.query.currentPage;
+      const size = parseInt(req.query.perPageItem);
 
-    // //UPDATE PUT API for Staus
+      let result;
+      const count = await cursor.count();
+      if (page) {
+        result = await cursor
+          .skip(page * size)
+          .limit(size)
+          .toArray();
+      } else {
+        result = await cursor.toArray();
+      }
+
+      res.send({
+        count,
+        result,
+      });
+    });
+
+    // //UPDATE PUT API for all
     app.put("/addstudent/:id", async (req, res) => {
       console.log(req.body);
       const id = req.body._id;
